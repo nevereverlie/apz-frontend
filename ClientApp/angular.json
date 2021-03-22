@@ -31,9 +31,20 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/css/main.css",
+              "src/assets/css/noscript.css",
+              "src/assets/css/font-awesome.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/jquery.min.js",
+              "src/assets/js/jquery.scrollex.min.js",
+              "src/assets/js/jquery.scrolly.min.js",
+              "src/assets/js/browser.min.js",
+              "src/assets/js/breakpoints.min.js",
+              "src/assets/js/util.js",
+              "src/assets/js/main.js"
+            ]
           },
           "configurations": {
             "production": {
