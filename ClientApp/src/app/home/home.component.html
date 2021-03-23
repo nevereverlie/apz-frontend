@@ -2,20 +2,46 @@
 <div id="main">
 
   <!-- Featured Post -->
-    <article class="post featured">
+    <article class="post featured" id="post">
       <header class="major">
-        <h2><a href="#">Portfolio<br />
-        with all my works</a></h2>
-        <p>There you can see a collection of all my works<br />
-        which I made during long period of learning C# and .NET platform<br />
-        from scratch and see my progress all along.</p>
+        <h2><a href="#">{{ 'POST_TITLE_PART_1' | translate }}<br />
+        {{ 'POST_TITLE_PART_2' | translate }}</a></h2>
+        <p>{{ 'POST_CONTENT_PART_1' | translate }}<br />
+        {{ 'POST_CONTENT_PART_2' | translate }}<br />
+        {{ 'POST_CONTENT_PART_3' | translate }}</p>
       </header>
     </article>
 
-  <!-- Posts -->
+  <!-- Subscriptions -->
+    <section class="posts" id="subscriptions">
+      <article>
+        <header>
+          <span class="date">{{ 'STANDART_SUBSCRIPTION_NOTE' | translate }}</span>
+          <h2><a href="https://github.com/nevereverlie/RDR2-Mods" target="_blank">{{ 'STANDART_SUBSCRIPTION_NAME' | translate }}</a></h2>
+        </header>
+        <a href="https://github.com/nevereverlie/RDR2-Mods" target="_blank" class="image fit"><img src="../../assets/images/STANDART.png" alt="" /></a>
+        <p style="text-align: center;">{{ 'STANDART_SUBSCRIPTION_PRICE' | translate }}</p>
+        <ul class="actions special">
+          <li><a href="https://github.com/nevereverlie/RDR2-Mods" target="_blank" class="button">{{ 'BUY' | translate }}</a></li>
+        </ul>
+      </article>
+      <article>
+        <header>
+          <span class="date">{{ 'PREMIUM_SUBSCRIPTION_NOTE' | translate }}</span>
+          <h2><a href="https://github.com/nevereverlie/Revisory-Control.API" target="_blank">{{ 'PREMIUM_SUBSCRIPTION_NAME' | translate }}</a></h2>
+        </header>
+        <a href="https://github.com/nevereverlie/Revisory-Control.API" target="_blank" class="image fit"><img src="../../assets/images/PREMIUM.png" alt="" /></a>
+        <p style="text-align: center;">{{ 'PREMIUM_SUBSCRIPTION_PRICE' | translate }}</p>
+        <ul class="actions special">
+          <li><a href="https://github.com/nevereverlie/Revisory-Control.API" target="_blank" class="button">{{ 'BUY' | translate }}</a></li>
+        </ul>
+      </article>
+    </section>
+
+  <!-- Posts (TODO)
     <header>
       <div class="skills">
-        <h2>Professional Skills</h2>
+        <h2 style="text-align: center;">Professional Skills</h2>
         <ul>
           <li>2 years of non-commercial development in C# and .NET platform</li>
           <li>Good understanding of OOP principles</li>
@@ -30,88 +56,22 @@
           <li>Additionally worked with WinForms, JSON, JWT, Azure</li>
         </ul>
       </div>
-      <a class="image main"><img src="images/linkedin.jpg" alt="" /></a>
+      <div class="skills">
+        <h2 style="text-align: center;">Professional Skills</h2>
+        <ul>
+          <li>2 years of non-commercial development in C# and .NET platform</li>
+          <li>Good understanding of OOP principles</li>
+          <li>Work experience with ASP.NET Core (Web API)</li>
+          <li>Understanding of MVC pattern and REST approach</li>
+          <li>HTML + CSS + TypeScript</li>
+          <li>Experience of working with Angular 2 (Frontend)</li>
+          <li>Knowledge of SQL queries, MS SQL Server, SQlite</li>
+          <li>Entity Framework Core as main ORM</li>
+          <li>Experience of working in team of students based on Agile</li>
+          <li>Knowledge of Еnglish at the Upper-Intermediate level</li>
+          <li>Additionally worked with WinForms, JSON, JWT, Azure</li>
+        </ul>
+      </div>
     </header>
-
-    <ul class="actions special">
-      <li><a href="https://github.com/nevereverlie?tab=repositories" target="_blank" class="button large">My Works</a></li>
-    </ul>
-    <section class="posts">
-      <article>
-        <header>
-          <span class="date">January, 2021</span>
-          <h2><a href="https://github.com/nevereverlie/RDR2-Mods" target="_blank">Red Dead Redemption 2<br />
-          modifications pack</a></h2>
-        </header>
-        <a href="https://github.com/nevereverlie/RDR2-Mods" target="_blank" class="image fit"><img src="images/rdr2.png" alt="" /></a>
-        <p>A bunch of my personal mods for Red Dead Redeption 2 made as .NET Class library project</p>
-        <ul class="actions special">
-          <li><a href="https://github.com/nevereverlie/RDR2-Mods" target="_blank" class="button">Project</a></li>
-        </ul>
-      </article>
-      <article>
-        <header>
-          <span class="date">December, 2020</span>
-          <h2><a href="https://github.com/nevereverlie/Revisory-Control.API" target="_blank">Software System<br />
-          "Revisory Control"</a></h2>
-        </header>
-        <a href="https://github.com/nevereverlie/Revisory-Control.API" target="_blank" class="image fit"><img src="images/RC.png" alt="" /></a>
-        <p>"Revisory Control" is a software system for tracking and controling productivity of employees in any organization</p>
-        <ul class="actions special">
-          <li><a href="https://revisory-control.azurewebsites.net/" target="_blank" class="button primary">Website</a></li>
-          <li><a href="https://github.com/nevereverlie/Revisory-Control.API" target="_blank" class="button">Project</a></li>
-        </ul>
-      </article>
-      <article>
-        <header>
-          <span class="date">October, 2020</span>
-          <h2><a href="https://github.com/nevereverlie/Headway-Rhythm-Project-API" target="_blank">Headway Rhythm Project<br />
-          (HRP)</a></h2>
-        </header>
-        <a href="https://github.com/nevereverlie/Headway-Rhythm-Project-API" target="_blank" class="image fit"><img src="images/hrp.jpg" alt="" /></a>
-        <p>Team project based on the SCRUM methodology, where I performed as a fullstack .NET developer. The goal was to create a music service for listening, downloading and uploading tracks, as well as creating your own playlists</p>
-        <ul class="actions special">
-          <li><a href="https://hrp-api.herokuapp.com/index.html" target="_blank" class="button primary">OpenAPI (Swagger)</a></li>
-          <li><a href="https://github.com/nevereverlie/Headway-Rhythm-Project-API" target="_blank" class="button">Project</a></li>
-        </ul>
-      </article>
-      <article>
-        <header>
-          <span class="date">June, 2020</span>
-          <h2><a href="https://github.com/nevereverlie/SWMedia" target="_blank">Star Wars Media<br />
-          (SWM)</a></h2>
-        </header>
-        <a href="https://github.com/nevereverlie/SWMedia" target="_blank" class="image fit"><img src="images/swm.svg" height="300px" alt="" /></a>
-        <p>Project made with Angular 9, ASP.NET Core and SQLite in purpose of creating a unique environment for Star Wars fanbase. This is my very first big project made with full stack of technologies</p>
-        <ul class="actions special">
-          <li><a href="https://swmedia.azurewebsites.net/" target="_blank" class="button primary">Website</a></li>
-          <li><a href="https://github.com/nevereverlie/SWMedia" target="_blank" class="button">Project</a></li>
-        </ul>
-      </article>
-      <article>
-        <header>
-          <span class="date">December, 2019</span>
-          <h2><a href="https://github.com/nevereverlie/IS-Computer-Hardware-Department" target="_blank">Information System<br />
-          "Computer Hardware Department"</a></h2>
-        </header>
-        <a href="https://github.com/nevereverlie/IS-Computer-Hardware-Department" target="_blank" class="image fit"><img src="images/chd.jpg" alt="" /></a>
-        <p>Information system made with C#, Winforms and ADO.NET for computer hardware departments or business linked with computer hardware. The main features are: storing, adding, formatting and deleting information via database adapters</p>
-        <ul class="actions special">
-          <li><a href="https://github.com/nevereverlie/IS-Computer-Hardware-Department" target="_blank" class="button">Project</a></li>
-        </ul>
-      </article>
-      <article>
-        <header>
-          <span class="date">May, 2019</span>
-          <h2><a href="https://github.com/nevereverlie/Music-Lovers-Guidebook" target="_blank">Desktop Application<br />
-          "Music Lover's <br />
-          Guidebook"</a></h2>
-        </header>
-        <a href="https://github.com/nevereverlie/Music-Lovers-Guidebook" target="_blank" class="image fit"><img src="images/mlg.jpg" alt="" /></a>
-        <p>Simple project made with C# + WinForms to manipulate with local information about your favourite playlists and musical performers/groups. JSON files were used instead of localDB. My very first project made with C# completely from scratch</p>
-        <ul class="actions special">
-          <li><a href="https://github.com/nevereverlie/Music-Lovers-Guidebook" target="_blank" class="button">Project</a></li>
-        </ul>
-      </article>
-    </section>
+  -->
 </div>

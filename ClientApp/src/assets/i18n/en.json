@@ -1,3 +1,28 @@
 {
-  "PROJECT_TITLE": "Petvisor"
+  "PROJECT_TITLE": "Petvisor",
+  "PROJECT_NAME": "Program System for Animal Medication",
+  "MAIN_PAGE": "Main Page",
+  "SUBSCRIBE": "Subscribe",
+  "REGISTER": "Sign Up",
+
+  "POST_TITLE_PART_1": "On guard",
+  "POST_TITLE_PART_2": "for animal safety",
+  "POST_CONTENT_PART_1": "With Petvisor, a new era",
+  "POST_CONTENT_PART_2": "of automation of veterinary clinics and",
+  "POST_CONTENT_PART_3": "caring for our smaller brothers begins",
+
+  "STANDART_SUBSCRIPTION_NOTE": "If you want to give it a try",
+  "STANDART_SUBSCRIPTION_NAME": "Standart subscription",
+  "STANDART_SUBSCRIPTION_PRICE": "5$ per month",
+  "PREMIUM_SUBSCRIPTION_NOTE": "If you want all available functionality",
+  "PREMIUM_SUBSCRIPTION_NAME": "Premium subscription",
+  "PREMIUM_SUBSCRIPTION_PRICE": "10$ per month",
+  "BUY": "Subscribe",
+
+  "FOOTER_ADDRESS": "Address",
+  "FOOTER_ADDRESS_PART_1": "Kharkiv city, Babai #62403",
+  "FOOTER_ADDRESS_PART_2": "Shcherbininykh street No. 23",
+  "FOOTER_PHONE": "Phone",
+  "FOOTER_EMAIL": "Email",
+  "FOOTER_SOCIAL": "Social Media"
 }

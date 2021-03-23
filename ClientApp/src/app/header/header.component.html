@@ -3,12 +3,12 @@
   <!-- Intro -->
   <div id="intro">
     <h1>
-      {{'PROJECT_TITLE' | translate}}
+      {{ 'PROJECT_TITLE' | translate }}
     </h1>
-    <p>Program System for Animal Medication</p>
+    <p>{{ 'PROJECT_NAME' | translate }}</p>
     <ul class="actions">
       <li>
-        <a href="#header" class="button icon solid solo fa-arrow-down scrolly"
+        <a href="#post" class="button icon solid solo fa-arrow-down scrolly"
           >Continue</a
         >
       </li>
@@ -23,25 +23,30 @@
   <!-- Nav -->
   <nav id="nav">
     <ul class="links">
-      <li class="active"><a href="index.html">Main Page</a></li>
-			<li><a href="">Buy</a></li>
-			<li><a href="">Register</a></li>
+      <li class="active"><a href="index.html">{{ 'MAIN_PAGE' | translate }}</a></li>
+			<li><a href="#subscriptions">{{ 'SUBSCRIBE' | translate }}</a></li>
+			<li><a href="">{{ 'REGISTER' | translate }}</a></li>
     </ul>
+    <div style="margin-right: 5rem; display: flex;">
+      <a (click)="translateService.use('en')" style="font-family: 'Source Sans Pro'; cursor: pointer;">EN</a>
+      <p> | </p>
+      <a (click)="translateService.use('ukr')" style="font-family: 'Source Sans Pro'; cursor: pointer;">UA</a>
+      </div>
     <ul class="icons">
       <li>
         <a
           href="https://www.linkedin.com/in/hladkov37/"
           target="_blank"
-          class="icon brands fa-linkedin"
-          ><span class="label">LinkedIn</span></a
+          class="icon brands fa-facebook"
+          ><span class="label">Facebook</span></a
         >
       </li>
       <li>
         <a
           href="https://github.com/nevereverlie"
           target="_blank"
-          class="icon brands fa-github"
-          ><span class="label">GitHub</span></a
+          class="icon brands fa-telegram"
+          ><span class="label">Telegram</span></a
         >
       </li>
     </ul>

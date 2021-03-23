@@ -1,3 +1,28 @@
 {
-  "PROJECT_TITLE": "Petvisor"
+  "PROJECT_TITLE": "Petvisor",
+  "PROJECT_NAME": "Програмна система для прийому медикаментів тваринами",
+  "MAIN_PAGE": "Головна сторінка",
+  "SUBSCRIBE": "Підписатися",
+  "REGISTER": "Реєстрація",
+
+  "POST_TITLE_PART_1": "На варті",
+  "POST_TITLE_PART_2": "безпеки домашніх тварин",
+  "POST_CONTENT_PART_1": "З Petvisor настає нова ера",
+  "POST_CONTENT_PART_2": "у автоматизації ветеринарних клінік",
+  "POST_CONTENT_PART_3": "та турботи про наших менших братів",
+
+  "STANDART_SUBSCRIPTION_NOTE": "Гарний вибір для початку",
+  "STANDART_SUBSCRIPTION_NAME": "Стандартна підписка",
+  "STANDART_SUBSCRIPTION_PRICE": "150 UAH на місяць",
+  "PREMIUM_SUBSCRIPTION_NOTE": "Якщо потрібна повна функціональність",
+  "PREMIUM_SUBSCRIPTION_NAME": "Преміум підписка",
+  "PREMIUM_SUBSCRIPTION_PRICE": "300 UAH на місяць",
+  "BUY": "Підписатися",
+
+  "FOOTER_ADDRESS": "Адреса",
+  "FOOTER_ADDRESS_PART_1": "м. Харків, смт Бабаї #62403",
+  "FOOTER_ADDRESS_PART_2": "вул. Щербініних, 23",
+  "FOOTER_PHONE": "Телефон",
+  "FOOTER_EMAIL": "Email",
+  "FOOTER_SOCIAL": "Соціальні Мережі"
 }
