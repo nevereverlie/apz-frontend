@@ -16,7 +16,7 @@ export class AuthService {
   constructor(private http: HttpClient, private alertify: AlertifyService ) { }
 
   login(model: any) {
-    return this.http.post(this.baseUrl + 'loginUser', model)
+    return this.http.post(this.baseUrl + 'login', model)
       .pipe(
         map((response: any) => {
           const user = response;
@@ -29,7 +29,7 @@ export class AuthService {
   }
 
   register(model: any) {
-    return this.http.post(this.baseUrl + 'registerUser', model);
+    return this.http.post(this.baseUrl + 'register', model);
   }
 
 

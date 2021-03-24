@@ -25,7 +25,29 @@
     <ul class="links">
       <li class="active"><a href="index.html">{{ 'MAIN_PAGE' | translate }}</a></li>
 			<li><a href="#subscriptions">{{ 'SUBSCRIBE' | translate }}</a></li>
-			<li><a href="">{{ 'REGISTER' | translate }}</a></li>
+			<li><a *ngIf="!this.authService.loggedIn()" (click)="registerToggle(); openModalWithRegisterComponent()" style="cursor: pointer;">{{ 'REGISTER' | translate }}</a></li>
+			<li><a *ngIf="!this.authService.loggedIn()" (click)="loginToggle(); openModalWithLoginComponent()" style="cursor: pointer;">{{ 'LOGIN' | translate }}</a></li>
+      <li><a *ngIf="this.authService.loggedIn()" class="dropdown-item" (click)="logout()" style="cursor: pointer;">{{ 'LOGOUT' | translate }}</a></li>
+      <!--REGISTRATION FORM-->
+      <div *ngIf="registerMode" style="margin: auto; margin-top: 3em;">
+        <div class="row justify-content-center">
+          <div class="col-4">
+            <app-register
+              (cancelRegistration)="cancelRegistrationMode()"
+            ></app-register>
+          </div>
+        </div>
+      </div>
+      <!--LOGIN FORM-->
+      <div *ngIf="loginMode" style="margin: auto; margin-top: 3em;">
+        <div class="row justify-content-center">
+          <div class="col-4">
+            <app-register
+              (cancelLogin)="cancelLoginMode()"
+            ></app-register>
+          </div>
+        </div>
+      </div>
     </ul>
     <div style="margin-right: 5rem; display: flex;">
       <a (click)="translateService.use('en')" style="font-family: 'Source Sans Pro'; cursor: pointer;">EN</a>

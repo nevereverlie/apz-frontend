@@ -1,0 +1,17 @@
+<form #loginForm="ngForm" (ngSubmit)="login()" class="needs-validation mt-3 mb-3 ml-3 mr-3" novalidate>
+  <h2 class="text-center text-primary">Sign In</h2>
+  <hr>
+
+  <div class="form-group">
+    <input type="email" class="form-control" required name="email" [(ngModel)]="model.email" placeholder="E-mail *">
+  </div>
+
+  <div class="form-group">
+    <input type="password" class="form-control" required name="password" [(ngModel)]="model.password" placeholder="Password *" aria-describedby="passHelp">
+  </div>
+
+  <div class="form-group text-center">
+    <button class="btn btn-success" type="submit">Log In</button>
+    <button class="btn btn-default" type="button" (click)="bsModalRef.hide()">Cancel</button>
+  </div>
+</form>

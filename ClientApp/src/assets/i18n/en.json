@@ -4,6 +4,8 @@
   "MAIN_PAGE": "Main Page",
   "SUBSCRIBE": "Subscribe",
   "REGISTER": "Sign Up",
+  "LOGIN": "Sign In",
+  "LOGOUT": "Log Out",
 
   "POST_TITLE_PART_1": "On guard",
   "POST_TITLE_PART_2": "for animal safety",

@@ -1,6 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { JwtModule } from '@auth0/angular-jwt';
+import { BsModalService, ModalModule, BsModalRef } from 'ngx-bootstrap/modal';
+
+
 import { AuthService } from './_services/auth.service';
 import { AlertifyService } from './_services/alertify.service';
 
@@ -14,6 +19,8 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -33,7 +40,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    FooterComponent
+    FooterComponent,
+    RegisterComponent,
+    LoginComponent
    ],
   imports: [
     BrowserModule,
@@ -55,11 +64,15 @@ export function HttpLoaderFactory(http: HttpClient) {
         allowedDomains: ['localhost:5000'],
         disallowedRoutes: ['localhost:5000/auth']
       }
-    })
+    }),
+    FormsModule,
+    BsDropdownModule,
+    ModalModule.forRoot()
   ],
   providers: [
     AuthService,
-    AlertifyService
+    AlertifyService,
+    BsModalRef
   ],
   bootstrap: [AppComponent]
 })
