@@ -1,8 +1,9 @@
 {
   "PROJECT_TITLE": "Petvisor",
   "PROJECT_NAME": "Програмна система для прийому медикаментів тваринами",
-  "MAIN_PAGE": "Головна сторінка",
+  "MAIN_PAGE": "Головна",
   "SUBSCRIBE": "Підписатися",
+  "PROFILE": "Профіль",
   "REGISTER": "Реєстрація",
   "LOGIN": "Вхід",
   "LOGOUT": "Вийти",
@@ -20,6 +21,12 @@
   "PREMIUM_SUBSCRIPTION_NAME": "Преміум підписка",
   "PREMIUM_SUBSCRIPTION_PRICE": "300 UAH на місяць",
   "BUY": "Підписатися",
+
+  "YOUR_PROFILE": "Ваш профіль",
+  "PROFILE_FIRSTNAME": "Ваше ім'я:",
+  "PROFILE_LASTNAME": "Ваше прізвище:",
+  "PROFILE_UPDATE": "Зберегти",
+  "PROFILE_CANCEL": "Відмінити",
 
   "FOOTER_ADDRESS": "Адреса",
   "FOOTER_ADDRESS_PART_1": "м. Харків, смт Бабаї #62403",

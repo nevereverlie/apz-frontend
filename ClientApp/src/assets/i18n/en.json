@@ -2,6 +2,7 @@
   "PROJECT_TITLE": "Petvisor",
   "PROJECT_NAME": "Program System for Animal Medication",
   "MAIN_PAGE": "Main Page",
+  "PROFILE": "Profile",
   "SUBSCRIBE": "Subscribe",
   "REGISTER": "Sign Up",
   "LOGIN": "Sign In",
@@ -20,6 +21,12 @@
   "PREMIUM_SUBSCRIPTION_NAME": "Premium subscription",
   "PREMIUM_SUBSCRIPTION_PRICE": "10$ per month",
   "BUY": "Subscribe",
+
+  "YOUR_PROFILE": "Your profile",
+  "PROFILE_FIRSTNAME": "First name:",
+  "PROFILE_LASTNAME": "Last name:",
+  "PROFILE_UPDATE": "Update",
+  "PROFILE_CANCEL": "Cancel",
 
   "FOOTER_ADDRESS": "Address",
   "FOOTER_ADDRESS_PART_1": "Kharkiv city, Babai #62403",

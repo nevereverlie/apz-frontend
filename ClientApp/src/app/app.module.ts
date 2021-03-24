@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { JwtModule } from '@auth0/angular-jwt';
 import { BsModalService, ModalModule, BsModalRef } from 'ngx-bootstrap/modal';
-
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AuthService } from './_services/auth.service';
 import { AlertifyService } from './_services/alertify.service';
@@ -21,6 +21,11 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { ProfileComponent } from './profile/profile.component';
+import { faEdit, faUser } from '@fortawesome/free-regular-svg-icons';
+import { faLock, fas, faTimes, faUnlock } from '@fortawesome/free-solid-svg-icons';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AdministrationComponent } from './administration/administration.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -36,13 +41,15 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     HeaderComponent,
     HomeComponent,
     FooterComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    ProfileComponent,
+      AdministrationComponent
    ],
   imports: [
     BrowserModule,
@@ -66,8 +73,10 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
     FormsModule,
-    BsDropdownModule,
-    ModalModule.forRoot()
+    BsDropdownModule.forRoot(),
+    ModalModule.forRoot(),
+    FontAwesomeModule,
+    NgbModule
   ],
   providers: [
     AuthService,
@@ -76,4 +85,9 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(library: FaIconLibrary) {
+    library.addIconPacks(fas);
+    library.addIcons(faLock, faUnlock, faTimes, faUser);
+  }
+ }

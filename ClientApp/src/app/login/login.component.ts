@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.login(this.model).subscribe(() => {
       this.alertify.success('Logged in!');
+      console.log(this.authService.decodedToken);
       this.bsModalRef.hide();
     }, error => {
       this.alertify.error(error);

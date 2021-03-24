@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -10,7 +10,8 @@ import { AuthService } from '../_services/auth.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class HeaderComponent implements OnInit {
   model: any = {};
@@ -24,8 +25,7 @@ export class HeaderComponent implements OnInit {
               private router: Router,
               private modalService: BsModalService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   openModalWithRegisterComponent() {
     this.bsModalRef = this.modalService.show(RegisterComponent);

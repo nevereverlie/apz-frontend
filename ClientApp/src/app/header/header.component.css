@@ -12,3 +12,7 @@
   border-width: 5px !important;
   font-family: 'Raleway', sans-serif;
 }
+
+::ng-deep .dropdown, .dropdown-menu, .dropdown-item {
+  z-index: 9999 !important;
+}
