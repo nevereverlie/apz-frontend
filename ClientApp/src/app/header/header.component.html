@@ -29,6 +29,7 @@
 			<li><a *ngIf="!this.authService.loggedIn()" (click)="loginToggle(); openModalWithLoginComponent()" style="cursor: pointer;">{{ 'LOGIN' | translate }}</a></li>
       <li><a *ngIf="this.authService.loggedIn()" [routerLink]="['/profile']" routerLinkActive="router-link-active">{{ 'PROFILE' | translate }}</a>
       <li><a *ngIf="this.authService.loggedIn()" (click)="logout()" style="cursor: pointer;">{{ 'LOGOUT' | translate }}</a></li>
+      <li><a *ngIf="this.authService.isAdmin" [routerLink]="['/administration']" routerLinkActive="router-link-active" style="cursor: pointer;">{{ 'ADMINISTRATION' | translate }}</a></li>
       <!--REGISTRATION FORM-->
       <div *ngIf="registerMode" style="margin: auto; margin-top: 3em;">
         <div class="row justify-content-center">

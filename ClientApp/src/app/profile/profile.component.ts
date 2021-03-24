@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { faEdit } from '@fortawesome/free-solid-svg-icons/faEdit';
-import { faLock } from '@fortawesome/free-solid-svg-icons/faLock';
-import { faUnlock } from '@fortawesome/free-solid-svg-icons/faUnlock';
-import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons/faUserCircle';
 import { AlertifyService } from '../_services/alertify.service';
 import { AuthService } from '../_services/auth.service';
 import { UsersService } from '../_services/users.service';
@@ -35,10 +31,6 @@ export class ProfileComponent implements OnInit {
   };
 
   faEdit = faEdit;
-  faLock = faLock;
-  faUnlock = faUnlock;
-  faTimes = faTimes;
-  faUser = faUserCircle;
 
   closeResult: any;
   updateMode: boolean = false;
@@ -90,27 +82,4 @@ export class ProfileComponent implements OnInit {
   changeUpdateMode() {
     this.updateMode = !this.updateMode;
   }
-
-  open(content: any) {
-    const modalRef = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
-
-  openVerticallyCentered(content: any) {
-    this.modalService.open(content, { centered: true , windowClass: 'dark-modal'});
-  }
-
 }

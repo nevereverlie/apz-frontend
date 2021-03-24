@@ -12,6 +12,7 @@ export class AuthService {
   baseUrl = environment.apiUrl + 'auth/';
   jwtHelper = new JwtHelperService();
   decodedToken: any;
+  isAdmin: boolean = false;
 
   constructor(private http: HttpClient, private alertify: AlertifyService ) { }
 
@@ -23,6 +24,7 @@ export class AuthService {
           if (user) {
             localStorage.setItem('token', user.token);
             this.decodedToken = this.jwtHelper.decodeToken(user.token);
+            this.decodedToken.email === "admin@petvisor.com" ? this.isAdmin = true : this.isAdmin = false;
           }
         })
       );

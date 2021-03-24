@@ -1,3 +1,287 @@
-<p>
-  administration works!
-</p>
+<div id="main" style="padding-bottom: 500px;">
+  <ngb-accordion [closeOthers]="true">
+    <ngb-panel id="users-1" title="Medications" style="font-size: x-large;">
+      <ng-template ngbPanelContent>
+        <!-- Medications table -->
+        <table class="table admin-table table-striped table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">
+                {{ 'MEDICINE_ID' | translate }}
+                <div class="lockIcon">
+                  <fa-icon [icon]="faLock" *ngIf="!updateMode" aria-hidden="true" style="padding-left: 1rem"></fa-icon>
+                  <fa-icon [icon]="faUnlock" *ngIf="updateMode" aria-hidden="true" style="padding-left: 1rem"></fa-icon>
+                </div>
+              </th>
+              <th scope="col">
+                {{ 'MEDICATION_AMOUNT' | translate }}
+                <div class="lockIcon">
+                  <fa-icon [icon]="faLock" *ngIf="!updateMode" aria-hidden="true" style="padding-left: 1rem"></fa-icon>
+                  <fa-icon [icon]="faUnlock" *ngIf="updateMode" aria-hidden="true" style="padding-left: 1rem"></fa-icon>
+                </div>
+              </th>
+              <th scope="col">
+                {{ 'MEDICATION_TYPE' | translate }}
+                <div class="lockIcon">
+                  <fa-icon [icon]="faLock" *ngIf="!updateMode" aria-hidden="true" style="padding-left: 1rem"></fa-icon>
+                  <fa-icon [icon]="faUnlock" *ngIf="updateMode" aria-hidden="true" style="padding-left: 1rem"></fa-icon>
+                </div>
+              </th>
+              <th scope="col">
+                {{ 'MEDICATION_TIME' | translate }}
+                <div class="lockIcon">
+                  <fa-icon [icon]="faLock" *ngIf="!updateMode" aria-hidden="true" style="padding-left: 1rem"></fa-icon>
+                  <fa-icon [icon]="faUnlock" *ngIf="updateMode" aria-hidden="true" style="padding-left: 1rem"></fa-icon>
+                </div>
+              </th>
+              <th scope="col">
+                X
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let medication of medications">
+              <th scope="row">{{ medication.medicationId }}</th>
+              <td style="width: 100%">
+                <div class="form-group">
+                  <div *ngIf="!updateMode; then viewMode0; else updatingMode0"></div>
+                  <ng-template #viewMode0
+                    ><input
+                      name="medInput"
+                      placeholder="{{ medication.medicineId }}"
+                      disabled />
+                  </ng-template>
+                  <ng-template #updatingMode0
+                    ><input
+                      class="medicationIdInput updateInput"
+                      name="depInput"
+                      placeholder="{{ medication.medicineId }}" />
+                  </ng-template>
+                </div>
+              </td>
+              <td style="width: 100%">
+                <div class="form-group">
+                  <div *ngIf="!updateMode; then viewMode1; else updatingMode1"></div>
+                  <ng-template #viewMode1
+                    ><input
+                      name="medInput"
+                      placeholder="{{ medication.medicationAmount }}"
+                      disabled />
+                  </ng-template>
+                  <ng-template #updatingMode1
+                    ><input
+                      class="medicationAmount updateInput"
+                      name="depInput"
+                      placeholder="{{ medication.medicationAmount }}" />
+                  </ng-template>
+                </div>
+              </td>
+              <td style="width: 100%">
+                <div class="form-group">
+                  <div *ngIf="!updateMode; then viewMode2; else updatingMode2"></div>
+                  <ng-template #viewMode2
+                    ><input
+                      name="medInput"
+                      placeholder="{{ medication.medicationType }}"
+                      disabled />
+                  </ng-template>
+                  <ng-template #updatingMode2
+                    ><input
+                      class="medicationTypeInput updateInput"
+                      name="depInput"
+                      placeholder="{{ medication.medicationType }}" />
+                  </ng-template>
+                </div>
+              </td>
+              <td style="width: 100%">
+                <div class="form-group">
+                  <div *ngIf="!updateMode; then viewMode3; else updatingMode3"></div>
+                  <ng-template #viewMode3>
+                    <input
+                      name="medInput"
+                      placeholder="{{ medication.medicationTime }}"
+                      disabled />
+                    <div class="timesIcon">
+                      <fa-icon [icon]="faTimes" style="font-size: 36px; color: red; cursor: pointer" (click)="deleteMedicationConfirmation(medication.medicationId)"></fa-icon>
+                    </div>
+                  </ng-template>
+                  <ng-template #updatingMode3>
+                    <input
+                      class="medicationTimeInput updateInput"
+                      name="depInput"
+                      placeholder="{{ medication.medicationTime }}" />
+                    <div class="timesIcon">
+                      <fa-icon [icon]="faTimes" style="font-size: 36px; color: red; cursor: pointer" (click)="deleteMedicationConfirmation(medication.medicationId)"></fa-icon>
+                    </div>
+                  </ng-template>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="container">
+          <div class="row">
+            <button
+              type="button"
+              class="btn btn-outline-success btn-lg"
+              (click)="openVerticallyCentered(content)"
+            >
+              Створити
+            </button>
+            <ng-template #content let-modal>
+              <div class="modal-header">
+                <h4 class="modal-title">Створення medication</h4>
+                <button
+                  type="button"
+                  class="close"
+                  aria-label="Close"
+                  (click)="modal.dismiss('Cross click')"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <label>Med id: </label>
+                <input
+                  style="margin-left: 1rem; width: auto"
+                  [(ngModel)]="medicationForCreation.medicineId"
+                />
+                <label>Amount: </label>
+                <input
+                  style="margin-left: 1rem; width: auto"
+                  [(ngModel)]="medicationForCreation.medicationAmount"
+                />
+                <label>Type: </label>
+                <input
+                  style="margin-left: 1rem; width: auto"
+                  [(ngModel)]="medicationForCreation.medicationType"
+                />
+                <label>Time: </label>
+                <input
+                  style="margin-left: 1rem; width: auto"
+                  [(ngModel)]="medicationForCreation.medicationTime"
+                />
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-light"
+                  (click)="modal.close('Close click')"
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  (click)="
+                    createMedication(medicationForCreation); modal.close('Ok click')
+                  "
+                >
+                  Створити
+                </button>
+              </div>
+            </ng-template>
+            <button
+              type="button"
+              class="btn btn-outline-primary btn-lg"
+              id="BtnUpdate"
+              (click)="changeUpdateMode(); !updateMode ? updateMedications() : ''"
+            >
+              {{ updateMode ? "Зберегти зміни" : "Змінити" }}
+            </button>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-panel>
+    <ngb-panel id="users-2" title="Користувачі">
+      <ng-template ngbPanelContent>
+        <!-- Users table -->
+        <table class="table admin-table table-striped table-hover" style="overflow: auto; width: 90%;">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">{{ 'USERS_FIRSTNAME' | translate }}
+                <div class="lockIcon">
+                  <fa-icon [icon]="faLock" *ngIf="!updateMode" aria-hidden="true" style="padding-left: 1rem;"></fa-icon>
+                  <fa-icon [icon]="faUnlock" *ngIf="updateMode" aria-hidden="true" style="padding-left: 1rem;"></fa-icon>
+                </div>
+              </th>
+              <th scope="col">{{ 'USERS_LASTNAME' | translate }}
+                <div class="lockIcon">
+                  <fa-icon [icon]="faLock" *ngIf="!updateMode" aria-hidden="true" style="padding-left: 1rem;"></fa-icon>
+                  <fa-icon [icon]="faUnlock" *ngIf="updateMode" aria-hidden="true" style="padding-left: 1rem;"></fa-icon>
+                </div>
+              </th>
+              <th scope="col">E-mail
+                <div class="lockIcon">
+                  <fa-icon [icon]="faLock" *ngIf="!updateMode" aria-hidden="true" style="padding-left: 1rem;"></fa-icon>
+                  <fa-icon [icon]="faUnlock" *ngIf="updateMode" aria-hidden="true" style="padding-left: 1rem;"></fa-icon>
+                </div>
+              </th>
+              <th scope="col">{{ 'USERS_HOSPITAL_ID' | translate }}
+                <div class="lockIcon">
+                  <fa-icon [icon]="faLock" *ngIf="!updateMode" aria-hidden="true" style="padding-left: 1rem;"></fa-icon>
+                  <fa-icon [icon]="faUnlock" *ngIf="updateMode" aria-hidden="true" style="padding-left: 1rem;"></fa-icon>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users">
+              <ng-container>
+                <th scope="row">{{user?.userId}}</th>
+                <td style="width: 100%;">
+                  <div class="form-group">
+                    <div *ngIf="!updateMode; then viewMode0 else updateMode0"></div>
+                      <ng-template #viewMode0>
+                        <input class="firstnameInput" name="firstnameInput" placeholder="{{user?.firstname}}" disabled>
+                      </ng-template>
+                      <ng-template #updateMode0>
+                        <input class="firstnameInput updateInput" name="firstnameInput" placeholder="{{user?.firstname}}">
+                      </ng-template>
+                  </div>
+                </td>
+                <td style="width: 100%;">
+                  <div class="form-group">
+                    <div *ngIf="!updateMode; then viewMode1 else updateMode1"></div>
+                      <ng-template #viewMode1><input class="lastnameInput" name="lastnameInput" placeholder="{{user?.lastname}}" disabled></ng-template>
+                      <ng-template #updateMode1><input class="lastnameInput updateInput" name="lastnameInput" placeholder="{{user?.lastname}}"></ng-template>
+                  </div>
+                </td>
+                <td style="width: 100%;">
+                  <div class="form-group">
+                    <div *ngIf="!updateMode; then viewMode2 else updateMode2"></div>
+                      <ng-template #viewMode2><input class="emailInput" name="emailInput" placeholder="{{user?.userEmail}}" disabled></ng-template>
+                      <ng-template #updateMode2><input class="emailInput updateInput" name="emailInput" placeholder="{{user?.userEmail}}"></ng-template>
+                  </div>
+                </td>
+                <td style="width: 100%;">
+                  <div class="form-group">
+                    <div *ngIf="!updateMode; then viewMode3 else updateMode3"></div>
+                      <ng-template #viewMode3>
+                        <input class="hospitalIdInput" name="hospitalIdInput" placeholder="{{user?.hospitalId}}" disabled>
+                        <div class="timesIcon">
+                          <fa-icon [icon]="faTimes" style="font-size: 36px; color: red; cursor: pointer" (click)="deleteUserConfirmation(user.userId)"></fa-icon>
+                        </div>
+                      </ng-template>
+                      <ng-template #updateMode3>
+                        <input class="hospitalIdInput updateInput" name="hospitalIdInput" placeholder="{{user?.hospitalId}}">
+                        <div class="timesIcon">
+                          <fa-icon [icon]="faTimes" style="font-size: 36px; color: red; cursor: pointer" (click)="deleteUserConfirmation(user.userId)"></fa-icon>
+                        </div>
+                      </ng-template>
+                  </div>
+              </ng-container>
+            </tr>
+          </tbody>
+        </table>
+        <div class="container">
+          <div class="row">
+            <button type="button" class="btn btn-outline-primary btn-lg" id="BtnUpdate" (click)="changeUpdateMode(); !updateMode ? updateUsers() : ''">{{updateMode ? 'Зберегти' : 'Змінити'}}</button>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
+</div>

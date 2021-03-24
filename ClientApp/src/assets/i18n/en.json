@@ -2,11 +2,12 @@
   "PROJECT_TITLE": "Petvisor",
   "PROJECT_NAME": "Program System for Animal Medication",
   "MAIN_PAGE": "Main Page",
-  "PROFILE": "Profile",
   "SUBSCRIBE": "Subscribe",
+  "PROFILE": "Profile",
   "REGISTER": "Sign Up",
   "LOGIN": "Sign In",
   "LOGOUT": "Log Out",
+  "ADMINISTRATION": "Administration",
 
   "POST_TITLE_PART_1": "On guard",
   "POST_TITLE_PART_2": "for animal safety",
