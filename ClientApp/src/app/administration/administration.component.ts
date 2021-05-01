@@ -21,7 +21,13 @@ export class AdministrationComponent implements OnInit {
   usersForUpdate: any;
   medications!: Medication[];
   medicationsForUpdate: any;
-  medicationForCreation!: Medication;
+  medicationForCreation: Medication = {
+    medicationId: 0,
+    medicineId: 0,
+    medicationAmount: 10,
+    medicationType: "Type",
+    medicationTime: new Date('1968-11-16T00:00:00')
+  };
 
   faLock = faLock;
   faUnlock = faUnlock;
@@ -66,16 +72,15 @@ export class AdministrationComponent implements OnInit {
   }
 
   updateUsers() {
-    let isChanging = false;
-    try {
-      // const { inputsLength, firstnameInputs, lastnameInputs,
-      //         emailInputs, departmentInputs, workedHoursInputs,
-      //         wastedHoursInputs, workedMinutesInputs, wastedMinutesInputs } = this.getUserInputs();
+    let isChanging = true;
+    console.log(this.users);
+    console.log(this.usersForUpdate);
+    const { inputsLength, firstnameInputs, lastnameInputs,
+            emailInputs, hospitalIdInputs } = this.getUserInputs();
 
-      // isChanging = this.anyUserChanges(inputsLength, firstnameInputs, isChanging, lastnameInputs,
-      //                                  emailInputs, departmentInputs, workedHoursInputs, wastedHoursInputs,
-      //                                  workedMinutesInputs, wastedMinutesInputs);
-
+    isChanging = this.anyUserChanges(inputsLength, firstnameInputs, isChanging, lastnameInputs,
+                                    emailInputs, hospitalIdInputs);
+      try {
       if (isChanging) {
         let isErrorResponse = false;
         this.updating = true;
@@ -83,6 +88,7 @@ export class AdministrationComponent implements OnInit {
           if (this.isMismatch(i)) {
             const updatedUser = this.usersForUpdate[i];
             const form = new FormData();
+            console.log(updatedUser);
             this.makeUserFormData(form, updatedUser);
             this.usersService.updateUser(form).subscribe(() => { }, (error: any) => {
               console.log(error);
@@ -93,10 +99,10 @@ export class AdministrationComponent implements OnInit {
         if (!isErrorResponse) {
           setTimeout(() => {
             this.getUsers().then(() => {
-              this.alertify.success('Профілі успішно оновлено');
+              this.alertify.success('Success');
               this.updating = false;
             });
-          }, 1000);
+          }, 2000);
         }
       }
     } catch (e) {
@@ -109,7 +115,7 @@ export class AdministrationComponent implements OnInit {
     form.append('Firstname', updatedUser.firstname);
     form.append('Lastname', updatedUser.lastname);
     form.append('UserEmail', updatedUser.userEmail);
-    form.append('HospitalId', updatedUser.hospitalId.toString());
+    form.append('HospitalId', "1");
   }
 
   private isMismatch(i: number) {
@@ -118,6 +124,30 @@ export class AdministrationComponent implements OnInit {
            this.users[i].userEmail !== this.usersForUpdate[i].userEmail ||
            this.users[i]?.hospitalId !== this.usersForUpdate[i]?.hospitalId
   }
+
+  private anyUserChanges(inputsLength: number, firstnameInputs: any, isChanging: boolean,
+                        lastnameInputs: any, emailInputs: any, hospitalIdInputs: any) {
+    for (let index = 0; index < inputsLength; index++) {
+      if (firstnameInputs[index].value.toString() !== '') {
+        isChanging = true;
+        this.usersForUpdate[index].firstname = firstnameInputs[index].value.toString();
+      }
+      if (lastnameInputs[index].value.toString() !== '') {
+        isChanging = true;
+        this.usersForUpdate[index].lastname = lastnameInputs[index].value.toString();
+      }
+      if (emailInputs[index].value.toString() !== '') {
+        isChanging = true;
+        this.usersForUpdate[index].userEmail = emailInputs[index].value.toString();
+      }
+      if (hospitalIdInputs[index].value.toString() !== '') {
+        isChanging = true;
+        this.usersForUpdate[index].hospitalId = hospitalIdInputs[index].value.toString();
+      }
+    }
+
+    return isChanging;
+}
 
   private getUserInputs() {
     const inputsLength = document.getElementsByClassName('firstnameInput').length;
@@ -130,13 +160,13 @@ export class AdministrationComponent implements OnInit {
   }
 
   deleteUserConfirmation(userId: number) {
-    this.alertify.confirm('Ви впевнені, що хочете назавжди видалити користувача?', () => this.deleteUser(userId));
+    this.alertify.confirm('Are you sure you want to delete this user?', () => this.deleteUser(userId));
   }
 
   private deleteUser(userId: number) {
     this.usersService.deleteUser(userId).subscribe(() => {
       this.getUsers();
-      this.alertify.warning('Користувач видалений');
+      this.alertify.warning('User deleted');
     }, (error: string) => {
       this.alertify.error(error);
     });
@@ -230,35 +260,35 @@ export class AdministrationComponent implements OnInit {
   }
 
   deleteMedicationConfirmation(medId: number) {
-    this.alertify.confirm('Ви впевнені, що хочете назавжди видалити medication?', () => this.deleteMedication(medId));
+    this.alertify.confirm('Are you sure you want to delete this medication?', () => this.deleteMedication(medId));
   }
 
   private deleteMedication(medId: number) {
     this.medicationsService.deleteMedication(medId).subscribe(() => {
       this.getMedications();
-      this.alertify.warning('Medication видалений');
+      this.alertify.warning('Medication deleted');
     }, (error: string) => {
       this.alertify.error(error);
     });
   }
 
-  // open(content: any) {
-  //   const modalRef = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-  //     this.closeResult = `Closed with: ${result}`;
-  //   }, (reason) => {
-  //     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-  //   });
-  // }
+  open(content: any) {
+    const modalRef = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
 
-  // private getDismissReason(reason: any): string {
-  //   if (reason === ModalDismissReasons.ESC) {
-  //     return 'by pressing ESC';
-  //   } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-  //     return 'by clicking on a backdrop';
-  //   } else {
-  //     return `with: ${reason}`;
-  //   }
-  // }
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
 
   openVerticallyCentered(content: any) {
     this.modalService.open(content, { centered: true });

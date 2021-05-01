@@ -24,7 +24,7 @@ export class UsersService {
   }
 
   updateUser(userToUpdate: FormData): any {
-    return this.http.put(this.baseUrl + 'update', userToUpdate);
+    return this.http.put(this.baseUrl + 'updateUser', userToUpdate);
   }
 
   updateProfile(profileToUpdate: User): any {

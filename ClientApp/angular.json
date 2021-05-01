@@ -31,8 +31,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
               "node_modules/bootstrap/dist/css/bootstrap.css",
+              "src/styles.scss",
               "src/assets/css/main.css",
               "src/assets/css/noscript.css",
               "src/assets/css/font-awesome.min.css"

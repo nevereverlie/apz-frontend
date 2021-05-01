@@ -1,6 +1,6 @@
 <div id="main" style="padding-bottom: 500px;">
   <ngb-accordion [closeOthers]="true">
-    <ngb-panel id="users-1" title="Medications" style="font-size: x-large;">
+    <ngb-panel id="users-1" title="{{ 'ADMIN_MEDICATIONS' | translate }}" style="font-size: x-large;">
       <ng-template ngbPanelContent>
         <!-- Medications table -->
         <table class="table admin-table table-striped table-hover">
@@ -125,9 +125,10 @@
             <button
               type="button"
               class="btn btn-outline-success btn-lg"
-              (click)="openVerticallyCentered(content)"
+              (click)="open(content)"
+              style="width: 200px; padding: 0 !important"
             >
-              Створити
+              {{ 'ADMIN_MEDICATIONS_CREATE' | translate }}
             </button>
             <ng-template #content let-modal>
               <div class="modal-header">
@@ -186,15 +187,16 @@
               type="button"
               class="btn btn-outline-primary btn-lg"
               id="BtnUpdate"
+              style="width: 200px; padding: 0 !important"
               (click)="changeUpdateMode(); !updateMode ? updateMedications() : ''"
             >
-              {{ updateMode ? "Зберегти зміни" : "Змінити" }}
+              {{ updateMode ? "Save" : "Edit" }}
             </button>
           </div>
         </div>
       </ng-template>
     </ngb-panel>
-    <ngb-panel id="users-2" title="Користувачі">
+    <ngb-panel id="users-2" title="{{ 'ADMIN_USERS' | translate }}">
       <ng-template ngbPanelContent>
         <!-- Users table -->
         <table class="table admin-table table-striped table-hover" style="overflow: auto; width: 90%;">
@@ -278,7 +280,12 @@
         </table>
         <div class="container">
           <div class="row">
-            <button type="button" class="btn btn-outline-primary btn-lg" id="BtnUpdate" (click)="changeUpdateMode(); !updateMode ? updateUsers() : ''">{{updateMode ? 'Зберегти' : 'Змінити'}}</button>
+            <button
+              type="button"
+              class="btn btn-outline-primary btn-lg"
+              id="BtnUpdate"
+              style="width: 200px; padding: 0 !important"
+              (click)="changeUpdateMode(); !updateMode ? updateUsers() : ''">{{updateMode ? 'Save' : 'Edit'}}</button>
           </div>
         </div>
       </ng-template>
