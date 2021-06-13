@@ -9,6 +9,7 @@ import { AuthService } from '../_services/auth.service';
 import { UsersService } from '../_services/users.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Medication, MedicationsService } from '../_services/medications.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-administration',
@@ -18,10 +19,18 @@ import { Medication, MedicationsService } from '../_services/medications.service
 })
 export class AdministrationComponent implements OnInit {
   users!: User[];
+  userId!: number;
   usersForUpdate: any;
-  medications!: Medication[];
-  medicationsForUpdate: any;
-  medicationForCreation!: Medication;
+  medications: Medication[] = [];
+  medicationsForUpdate: Medication[] = [];
+  medicationForCreation: Medication = {
+    medicationId: 0,
+    medicineName: 'Medicine',
+    medicationAmount: 0,
+    medicationType: 'Type',
+    medicationTime: '00:00',
+    userId: 0
+  };
 
   faLock = faLock;
   faUnlock = faUnlock;
@@ -39,9 +48,11 @@ export class AdministrationComponent implements OnInit {
     public authService: AuthService,
     private usersService: UsersService,
     private medicationsService: MedicationsService,
-    private modalService: NgbModal) {}
+    private modalService: NgbModal,
+    private jwtHelper: JwtHelperService) {}
 
   ngOnInit() {
+    this.userId = +this.jwtHelper.decodeToken(localStorage.getItem('token') as string).nameid;
     this.getUsers();
     this.getUsersForUpdate();
     this.getMedications();
@@ -66,25 +77,21 @@ export class AdministrationComponent implements OnInit {
   }
 
   updateUsers() {
-    let isChanging = false;
+    let isChanging = true;
     try {
-      // const { inputsLength, firstnameInputs, lastnameInputs,
-      //         emailInputs, departmentInputs, workedHoursInputs,
-      //         wastedHoursInputs, workedMinutesInputs, wastedMinutesInputs } = this.getUserInputs();
+      const { inputsLength, firstnameInputs, lastnameInputs, emailInputs, hospitalIdInputs } = this.getUserInputs();
 
-      // isChanging = this.anyUserChanges(inputsLength, firstnameInputs, isChanging, lastnameInputs,
-      //                                  emailInputs, departmentInputs, workedHoursInputs, wastedHoursInputs,
-      //                                  workedMinutesInputs, wastedMinutesInputs);
+      this.anyUserChanges(inputsLength, firstnameInputs, lastnameInputs,
+                                       emailInputs, hospitalIdInputs);
 
       if (isChanging) {
         let isErrorResponse = false;
         this.updating = true;
         for (let i = 0; i < this.users.length; i++) {
           if (this.isMismatch(i)) {
+            console.log("Mismatch");
             const updatedUser = this.usersForUpdate[i];
-            const form = new FormData();
-            this.makeUserFormData(form, updatedUser);
-            this.usersService.updateUser(form).subscribe(() => { }, (error: any) => {
+            this.usersService.updateUser(updatedUser).subscribe(() => { }, (error: any) => {
               console.log(error);
               isErrorResponse = true;
             });
@@ -103,16 +110,27 @@ export class AdministrationComponent implements OnInit {
       console.log(e);
     }
   }
-
-  private makeUserFormData(form: FormData, updatedUser: User) {
-    form.append('UserId', updatedUser.userId.toString());
-    form.append('Firstname', updatedUser.firstname);
-    form.append('Lastname', updatedUser.lastname);
-    form.append('UserEmail', updatedUser.userEmail);
-    form.append('HospitalId', updatedUser.hospitalId.toString());
+  anyUserChanges(inputsLength: number, firstnameInputs: HTMLInputElement[], lastnameInputs: HTMLInputElement[],
+                 emailInputs: HTMLInputElement[], hospitalIdInputs: HTMLInputElement[]): void {
+    for (let i = 0; i < inputsLength; i++) {
+      this.usersForUpdate[i].firstname = firstnameInputs[i].value || this.users[i].firstname;
+      this.usersForUpdate[i].lastname = lastnameInputs[i].value || this.users[i].lastname;
+      this.usersForUpdate[i].userEmail = emailInputs[i].value || this.users[i].userEmail;
+      this.usersForUpdate[i].hospitalId = hospitalIdInputs[i].value || this.users[i].hospitalId;
+    }
   }
 
+  // private makeUserFormData(form: FormData, updatedUser: User) {
+  //   form.append('UserId', updatedUser.userId.toString());
+  //   form.append('Firstname', updatedUser.firstname);
+  //   form.append('Lastname', updatedUser.lastname);
+  //   form.append('UserEmail', updatedUser.userEmail);
+  //   form.append('HospitalId', updatedUser.hospitalId.toString());
+  // }
+
   private isMismatch(i: number) {
+    console.log(this.users);
+    console.log(this.usersForUpdate);
     return this.users[i].firstname !== this.usersForUpdate[i].firstname ||
            this.users[i].lastname !== this.usersForUpdate[i].lastname ||
            this.users[i].userEmail !== this.usersForUpdate[i].userEmail ||
@@ -121,22 +139,22 @@ export class AdministrationComponent implements OnInit {
 
   private getUserInputs() {
     const inputsLength = document.getElementsByClassName('firstnameInput').length;
-    const firstnameInputs = document.getElementsByClassName('firstnameInput') as unknown as HTMLInputElement;
-    const lastnameInputs = document.getElementsByClassName('lastnameInput') as unknown as HTMLInputElement;
-    const emailInputs = document.getElementsByClassName('emailInput') as unknown as HTMLInputElement;
-    const hospitalIdInputs = document.getElementsByClassName('hospitalIdInput') as unknown as HTMLInputElement;
+    const firstnameInputs = document.getElementsByClassName('firstnameInput') as unknown as HTMLInputElement[];
+    const lastnameInputs = document.getElementsByClassName('lastnameInput') as unknown as HTMLInputElement[];
+    const emailInputs = document.getElementsByClassName('emailInput') as unknown as HTMLInputElement[];
+    const hospitalIdInputs = document.getElementsByClassName('hospitalIdInput') as unknown as HTMLInputElement[];
 
     return { inputsLength, firstnameInputs, lastnameInputs, emailInputs, hospitalIdInputs };
   }
 
   deleteUserConfirmation(userId: number) {
-    this.alertify.confirm('Ви впевнені, що хочете назавжди видалити користувача?', () => this.deleteUser(userId));
+    this.alertify.confirm('Are you sure you want to delete this user?', () => this.deleteUser(userId));
   }
 
   private deleteUser(userId: number) {
     this.usersService.deleteUser(userId).subscribe(() => {
       this.getUsers();
-      this.alertify.warning('Користувач видалений');
+      this.alertify.warning('User deleted');
     }, (error: string) => {
       this.alertify.error(error);
     });
@@ -145,6 +163,7 @@ export class AdministrationComponent implements OnInit {
   private getMedications(): Promise<Medication[]> {
     return new Promise<Medication[]>((resolve, reject) => {
       this.medicationsService.getMedications().subscribe((meds: any) => {
+        console.log(meds);
         resolve(this.medications = meds);
       }, (error: any) => {
         reject(console.log(error));
@@ -172,12 +191,12 @@ export class AdministrationComponent implements OnInit {
   updateMedications() {
     let isChanging = Boolean(true);
     try {
-      const { inputsLength, medicineIdInputs, amountInputs, typeInputs, timeInputs } = this.getMedicationsInputs();
+      const { inputsLength, medicineNameInputs, amountInputs, typeInputs, timeInputs } = this.getMedicationsInputs();
 
       if (isChanging) {
         this.updating = true;
         for (let i = 0; i < this.medications.length; i++) {
-          if (this.medications[i].medicineId !== this.medicationsForUpdate[i].medicineId) {
+          if (this.medications[i].medicineName !== this.medicationsForUpdate[i].medicineName) {
             const newMed = this.medicationsForUpdate[i];
             this.medicationsService.updateMedication(newMed).subscribe(() => { }, (error: any) => {
               console.log(error);
@@ -221,44 +240,44 @@ export class AdministrationComponent implements OnInit {
   private getMedicationsInputs() {
     const inputsLength = document.getElementsByClassName('departmentNameInput').length;
 
-    const medicineIdInputs = document.getElementsByClassName('medicineIdInput') as unknown as HTMLInputElement;
+    const medicineNameInputs = document.getElementsByClassName('medicineNameInput') as unknown as HTMLInputElement;
     const amountInputs = document.getElementsByClassName('medicationAmountInput') as unknown as HTMLInputElement;
     const typeInputs = document.getElementsByClassName('medicationTypeInput') as unknown as HTMLInputElement;
     const timeInputs = document.getElementsByClassName('medicationTimeInput') as unknown as HTMLInputElement;
 
-    return { inputsLength, medicineIdInputs, amountInputs, typeInputs, timeInputs };
+    return { inputsLength, medicineNameInputs, amountInputs, typeInputs, timeInputs };
   }
 
   deleteMedicationConfirmation(medId: number) {
-    this.alertify.confirm('Ви впевнені, що хочете назавжди видалити medication?', () => this.deleteMedication(medId));
+    this.alertify.confirm('Are you sure you want to delete this medication?', () => this.deleteMedication(medId));
   }
 
   private deleteMedication(medId: number) {
     this.medicationsService.deleteMedication(medId).subscribe(() => {
       this.getMedications();
-      this.alertify.warning('Medication видалений');
+      this.alertify.warning('Medication deleted');
     }, (error: string) => {
       this.alertify.error(error);
     });
   }
 
-  // open(content: any) {
-  //   const modalRef = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-  //     this.closeResult = `Closed with: ${result}`;
-  //   }, (reason) => {
-  //     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-  //   });
-  // }
+  open(content: any) {
+    const modalRef = this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
 
-  // private getDismissReason(reason: any): string {
-  //   if (reason === ModalDismissReasons.ESC) {
-  //     return 'by pressing ESC';
-  //   } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-  //     return 'by clicking on a backdrop';
-  //   } else {
-  //     return `with: ${reason}`;
-  //   }
-  // }
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
 
   openVerticallyCentered(content: any) {
     this.modalService.open(content, { centered: true });

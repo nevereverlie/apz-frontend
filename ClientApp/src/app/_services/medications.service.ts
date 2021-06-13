@@ -4,7 +4,8 @@ import { environment } from 'src/environments/environment';
 
 export interface Medication {
   medicationId: number;
-  medicineId: number;
+  userId: number;
+  medicineName: string;
   medicationAmount: number;
   medicationType: string;
   medicationTime: string;
@@ -26,7 +27,7 @@ export class MedicationsService {
     return this.http.post(this.baseUrl + 'add', medication)
   }
 
-  updateMedication(medicationToUpdate: FormData): any {
+  updateMedication(medicationToUpdate: Medication): any {
     return this.http.put(this.baseUrl + 'update', medicationToUpdate);
   }
 

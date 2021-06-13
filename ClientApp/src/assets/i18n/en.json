@@ -29,6 +29,10 @@
   "PROFILE_UPDATE": "Update",
   "PROFILE_CANCEL": "Cancel",
 
+  "ADMIN_MEDICATIONS": "Medications",
+  "ADMIN_MEDICATIONS_CREATE": "Create",
+  "ADMIN_USERS": "Users",
+
   "FOOTER_ADDRESS": "Address",
   "FOOTER_ADDRESS_PART_1": "Kharkiv city, Babai #62403",
   "FOOTER_ADDRESS_PART_2": "Shcherbininykh street No. 23",

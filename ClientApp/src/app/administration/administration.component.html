@@ -8,7 +8,7 @@
             <tr>
               <th scope="col">#</th>
               <th scope="col">
-                {{ 'MEDICINE_ID' | translate }}
+                {{ 'MEDICINE_NAME' | translate }}
                 <div class="lockIcon">
                   <fa-icon [icon]="faLock" *ngIf="!updateMode" aria-hidden="true" style="padding-left: 1rem"></fa-icon>
                   <fa-icon [icon]="faUnlock" *ngIf="updateMode" aria-hidden="true" style="padding-left: 1rem"></fa-icon>
@@ -49,14 +49,14 @@
                   <ng-template #viewMode0
                     ><input
                       name="medInput"
-                      placeholder="{{ medication.medicineId }}"
+                      placeholder="{{ medication.medicineName }}"
                       disabled />
                   </ng-template>
                   <ng-template #updatingMode0
                     ><input
                       class="medicationIdInput updateInput"
                       name="depInput"
-                      placeholder="{{ medication.medicineId }}" />
+                      placeholder="{{ medication.medicineName }}" />
                   </ng-template>
                 </div>
               </td>
@@ -131,7 +131,7 @@
             </button>
             <ng-template #content let-modal>
               <div class="modal-header">
-                <h4 class="modal-title">Створення medication</h4>
+                <h4 class="modal-title">Create medication</h4>
                 <button
                   type="button"
                   class="close"
@@ -142,10 +142,10 @@
                 </button>
               </div>
               <div class="modal-body">
-                <label>Med id: </label>
+                <label>Med name: </label>
                 <input
                   style="margin-left: 1rem; width: auto"
-                  [(ngModel)]="medicationForCreation.medicineId"
+                  [(ngModel)]="medicationForCreation.medicineName"
                 />
                 <label>Amount: </label>
                 <input
@@ -161,6 +161,11 @@
                 <input
                   style="margin-left: 1rem; width: auto"
                   [(ngModel)]="medicationForCreation.medicationTime"
+                />
+                <label>User ID: </label>
+                <input
+                  style="margin-left: 1rem; width: auto"
+                  [(ngModel)]="medicationForCreation.userId"
                 />
               </div>
               <div class="modal-footer">

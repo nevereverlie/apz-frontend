@@ -23,8 +23,8 @@ export class UsersService {
     return this.http.get(this.baseUrl + 'byEmail/' + email);
   }
 
-  updateUser(userToUpdate: FormData): any {
-    return this.http.put(this.baseUrl + 'update', userToUpdate);
+  updateUser(userToUpdate: User): any {
+    return this.http.put(this.baseUrl + 'updateUser', userToUpdate);
   }
 
   updateProfile(profileToUpdate: User): any {

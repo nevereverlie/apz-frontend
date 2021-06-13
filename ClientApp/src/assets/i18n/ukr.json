@@ -29,6 +29,10 @@
   "PROFILE_UPDATE": "Зберегти",
   "PROFILE_CANCEL": "Відмінити",
 
+  "ADMIN_MEDICATIONS": "Прийоми",
+  "ADMIN_MEDICATIONS_CREATE": "Створити",
+  "ADMIN_USERS": "Користувачі",
+
   "FOOTER_ADDRESS": "Адреса",
   "FOOTER_ADDRESS_PART_1": "м. Харків, смт Бабаї #62403",
   "FOOTER_ADDRESS_PART_2": "вул. Щербініних, 23",
