@@ -137,30 +137,6 @@ export class AdministrationComponent implements OnInit {
            this.users[i]?.hospitalId !== this.usersForUpdate[i]?.hospitalId
   }
 
-  private anyUserChanges(inputsLength: number, firstnameInputs: any, isChanging: boolean,
-                        lastnameInputs: any, emailInputs: any, hospitalIdInputs: any) {
-    for (let index = 0; index < inputsLength; index++) {
-      if (firstnameInputs[index].value.toString() !== '') {
-        isChanging = true;
-        this.usersForUpdate[index].firstname = firstnameInputs[index].value.toString();
-      }
-      if (lastnameInputs[index].value.toString() !== '') {
-        isChanging = true;
-        this.usersForUpdate[index].lastname = lastnameInputs[index].value.toString();
-      }
-      if (emailInputs[index].value.toString() !== '') {
-        isChanging = true;
-        this.usersForUpdate[index].userEmail = emailInputs[index].value.toString();
-      }
-      if (hospitalIdInputs[index].value.toString() !== '') {
-        isChanging = true;
-        this.usersForUpdate[index].hospitalId = hospitalIdInputs[index].value.toString();
-      }
-    }
-
-    return isChanging;
-}
-
   private getUserInputs() {
     const inputsLength = document.getElementsByClassName('firstnameInput').length;
     const firstnameInputs = document.getElementsByClassName('firstnameInput') as unknown as HTMLInputElement[];
