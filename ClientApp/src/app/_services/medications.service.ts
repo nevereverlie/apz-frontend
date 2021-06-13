@@ -8,7 +8,7 @@ export interface Medication {
   medicineName: string;
   medicationAmount: number;
   medicationType: string;
-  medicationTime: string;
+  medicationTime: Date;
 }
 
 @Injectable({
